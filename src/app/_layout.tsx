@@ -1,26 +1,30 @@
+import React from "react";
 import { SafeAreaView, View } from "react-native";
 import { Slot } from "expo-router";
 import {
     useFonts,
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
-} from '@expo-google-fonts/roboto'
-import { Loading } from "@/components/loading";
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_700Bold
+} from '@expo-google-fonts/inter'
+import  {Loading}  from "@/components/loading";
 
 export default function Layout(){
     const [fontsLoaded] = useFonts({
-        Roboto_400Regular,
-        Roboto_500Medium,
-        Roboto_700Bold,
+        Inter_400Regular,
+        Inter_500Medium,
+        Inter_700Bold
     })
 
-    if (!fontsLoaded) {
-        return <Loading/>
-           
+    if (fontsLoaded) {
+        return (
+            <View>
+                <Loading />
+            </View>
+        );
     }
     return(
-        <SafeAreaView className="bg-slate-900 flex-1">
+        <SafeAreaView className="bg-slate-900 flex-1 pt-5">
             <Slot/>
         </SafeAreaView>
     )
