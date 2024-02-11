@@ -39,10 +39,12 @@ export default function Home() {
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <Text className="text-white"> {item.title} </Text>
+                )
+                }
+                renderSectionHeader={({ section: { title } }) => (
+                    <Text className="text-white text-xl font-heading mt-3 mb-3 " > {title} </Text>
                 )}
-                renderSectionHeader={({section : {title}}) => {
-                    <Text className="text-white text-xl font-heading " > {title} </Text>
-                }}
+
             />
 
 
