@@ -40,6 +40,9 @@ export default function Home() {
                 renderItem={({ item }) => (
                     <Text className="text-white"> {item.title} </Text>
                 )}
+                renderSectionHeader={({section : {title}}) => {
+                    <Text className="text-white text-xl font-heading " > {title} </Text>
+                }}
             />
 
 
