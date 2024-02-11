@@ -1,15 +1,15 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, SectionList, Text } from "react-native";
 import { Header } from "@/components/header";
 import { CategoryButton } from "@/components/category-button";
 
-import { CATEGORIES } from "@/utils/data/products";
+import { CATEGORIES, MENU } from "@/utils/data/products";
 import { useState } from "react";
 
 export default function Home() {
 
     const [category, setCategory] = useState(CATEGORIES[0])
 
-    function handleCategorySelected(selectCategory:string) {
+    function handleCategorySelected(selectCategory: string) {
         setCategory(selectCategory)
     }
 
@@ -22,18 +22,26 @@ export default function Home() {
                 data={CATEGORIES}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) =>
-                    <CategoryButton 
+                    <CategoryButton
                         title={item}
                         isSelected={item === category}
                         onPress={() => handleCategorySelected(item)} />
                 }
-                
+
                 horizontal
                 className="max-h-10 mt-6"
                 contentContainerStyle={{ gap: 12, paddingHorizontal: 5 }}
                 showsHorizontalScrollIndicator={false}
 
             />
+            <SectionList
+                sections={MENU}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <Text className="text-white"> {item.title} </Text>
+                )}
+            />
+
 
         </View>
     )
