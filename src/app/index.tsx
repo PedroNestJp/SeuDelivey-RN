@@ -4,6 +4,7 @@ import { CategoryButton } from "@/components/category-button";
 
 import { CATEGORIES, MENU } from "@/utils/data/products";
 import { useState } from "react";
+import { Product } from "@/components/product";
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
             <Header title={'Faça seu pedido'} cartQuantityItems={2} />
 
             <FlatList
+            
                 data={CATEGORIES}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) =>
@@ -38,13 +40,15 @@ export default function Home() {
                 sections={MENU}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Text className="text-white"> {item.title} </Text>
+                    <Product data={item}/>
                 )
                 }
                 renderSectionHeader={({ section: { title } }) => (
                     <Text className="text-white text-xl font-heading mt-3 mb-3 " > {title} </Text>
                 )}
-
+                className="flex-1 p-5"
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{paddingBottom:70}}
             />
 
 
