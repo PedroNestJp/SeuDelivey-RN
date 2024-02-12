@@ -1,10 +1,12 @@
 import { View, FlatList, SectionList, Text } from "react-native";
-import { Header } from "@/components/header";
-import { CategoryButton } from "@/components/category-button";
+import { useState, useRef } from "react";
 
 import { CATEGORIES, MENU } from "@/utils/data/products";
-import { useState, useRef } from "react";
+
+import { Header } from "@/components/header";
+import { CategoryButton } from "@/components/category-button";
 import { Product } from "@/components/product";
+
 
 export default function Home() {
 
