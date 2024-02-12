@@ -6,6 +6,7 @@ import { CATEGORIES, MENU } from "@/utils/data/products";
 import { Header } from "@/components/header";
 import { CategoryButton } from "@/components/category-button";
 import { Product } from "@/components/product";
+import { Link } from "expo-router";
 
 
 export default function Home() {
@@ -32,11 +33,8 @@ export default function Home() {
 
     return (
         <View className="flex-1 pt-8">
-
             <Header title={'Faça seu pedido'} cartQuantityItems={2} />
-
             <FlatList
-            
                 data={CATEGORIES}
                 keyExtractor={(item) => item}
                 renderItem={({ item }) =>
@@ -57,7 +55,9 @@ export default function Home() {
                 sections={MENU}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Product data={item}/>
+                    <Link href={`/product/${item.id}`} asChild>
+                        <Product data={item}/>
+                    </Link>
                 )
                 }
                 renderSectionHeader={({ section: { title } }) => (
