@@ -20,14 +20,14 @@ export default function Home() {
 
         const sectionIndex = CATEGORIES.findIndex((category) => category === selectCategory)
         console.log(sectionIndex)
-        if(sectionListRef.current){
+        if (sectionListRef.current) {
             sectionListRef.current.scrollToLocation({
-                animated:true,
+                animated: true,
                 sectionIndex,
-                itemIndex:0,
+                itemIndex: 0,
 
             })
-            
+
         }
     }
 
@@ -55,17 +55,23 @@ export default function Home() {
                 sections={MENU}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
+
                     <Link href={`/product/${item.id}`} asChild>
-                        <Product data={item}/>
+                        <Product data={item} />
                     </Link>
-                )
-                }
+
+                )}
                 renderSectionHeader={({ section: { title } }) => (
-                    <Text className="text-white text-xl font-heading mt-3 mb-3 " > {title} </Text>
+
+                    <Text
+                        className="text-white text-xl font-heading mt-3 mb-3 ">
+                        {title}
+                    </Text>
+
                 )}
                 className="flex-1 p-5"
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{paddingBottom:70}}
+                contentContainerStyle={{ paddingBottom: 70 }}
             />
 
 
