@@ -25,7 +25,6 @@ export default function Cart() {
                 </Text>
             }
 
-
             <View className="flex-row items-center gap-2 mt-5 mb-5 ">
                 <Text className="text-white text-xl font-subTitle "> Total:</Text>
                 <Text className=" text-2xl text-lime-400 font-heading">{total}</Text>
