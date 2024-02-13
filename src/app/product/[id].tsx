@@ -1,7 +1,7 @@
 import { Image, Text, View } from "react-native";
 import { useLocalSearchParams, useNavigation, Redirect } from "expo-router";
 import { PRODUCTS } from "@/utils/data/products";
-import { FunctionCurency } from "@/utils/functions/function-currency";
+import { FormatCurrency } from "@/utils/functions/function-currency";
 import { Button } from "@/components/button";
 import { Feather } from "@expo/vector-icons"
 import { LinkButton } from "@/components/linkButton";
@@ -40,7 +40,7 @@ export default function Product() {
                 </Text>
                 <Text
                     className="font-heading text-2xl text-lime-400 my-4">
-                    {FunctionCurency(product.price)}
+                    {FormatCurrency(product.price)}
                 </Text>
                 <Text
                     className="text-slate-400 text-base leading-4 font-body mb-5 ">

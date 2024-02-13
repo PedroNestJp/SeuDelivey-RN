@@ -1,6 +1,6 @@
 
 
-export function FunctionCurency(value:number) {
+export function FormatCurrency(value:number) {
     return(
         value.toLocaleString("pt-BR",{
             style: 'currency',
