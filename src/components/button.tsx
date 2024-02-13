@@ -18,8 +18,10 @@ function Button({ children, ...rest }: ButtonProps) {
     return (
         <TouchableOpacity
             className="bg-lime-400 rounded-md items-center justify-center flex-row p-2 m-2"
-            activeOpacity={0.7}>
-            {children}
+            activeOpacity={0.7}
+            {...rest}>
+                {children}
+            
         </TouchableOpacity>
     )
 
@@ -27,7 +29,7 @@ function Button({ children, ...rest }: ButtonProps) {
 
 function ButtonText({ children, ...rest }: ButtonTextProps) {
     return (
-        <Text className="text-black text-base font-heading mx-2">
+        <Text className="text-black text-base font-heading mx-2" {...rest}>
             {children}
         </Text>
         )

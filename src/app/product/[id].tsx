@@ -1,16 +1,30 @@
 import { Image, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation, Redirect } from "expo-router";
 import { PRODUCTS } from "@/utils/data/products";
 import { FunctionCurency } from "@/utils/functions/function-currency";
 import { Button } from "@/components/button";
 import { Feather } from "@expo/vector-icons"
 import { LinkButton } from "@/components/linkButton";
+import { useCartStore } from "@/stores/cart-store";
 
 export default function Product() {
-
+    const cartStore = useCartStore()
+    const navigation = useNavigation()
     const { id } = useLocalSearchParams()
-    const product = PRODUCTS.filter((item) => item.id == id)[0]
-    console.log(product)
+    console.log(cartStore.products)
+
+
+    function handleAddToCart() {
+        if (product) {
+            cartStore.add(product)
+            navigation.goBack()
+        }
+    }
+    const product = PRODUCTS.find((item) => item.id === id)
+
+    if (!product) {
+        return <Redirect href={'/'} />
+    }
 
     return (
         <View className="flex-1">
@@ -20,15 +34,14 @@ export default function Product() {
                 resizeMode="cover"
             />
 
-            <View className="p-5 mt-8 flex-1">
-                <Text className="text-slate-400 text-base font-bold">
+            <View className="p-4 mt-8 flex-1 gap-1">
+                <Text className="text-white text-xl font-heading">
                     {product.title}
                 </Text>
                 <Text
-                    className="font-heading text-2xl text-lime-400 my-5">
+                    className="font-heading text-2xl text-lime-400 my-4">
                     {FunctionCurency(product.price)}
                 </Text>
-
                 <Text
                     className="text-slate-400 text-base leading-4 font-body mb-5 ">
                     {product.description}
@@ -45,9 +58,10 @@ export default function Product() {
 
             </View>
             <View className="p-4 pb-8">
-                <Button >
+                <Button onPress={handleAddToCart}>
+
                     <Button.Icon>
-                        <Feather name="plus-circle" size={20}/>
+                        <Feather name="plus-circle" size={20} />
                     </Button.Icon>
                     <Button.Text> Adicionar ao pedido </Button.Text>
                 </Button>
