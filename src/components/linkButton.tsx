@@ -6,7 +6,7 @@ type LinkButtonProps = LinkProps<string> & {
 
 export function LinkButton({ title, ...rest }: LinkButtonProps) {
     return (
-        <Link className="text-slate-400 text-center text-base font-body" {...rest}>
+        <Link className="text-slate-400 text-center text-base font-body p-4" {...rest}>
             {title}
         </Link>
     )

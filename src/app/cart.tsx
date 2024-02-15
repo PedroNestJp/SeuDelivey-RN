@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Text, View, ScrollView, Alert } from "react-native";
+import { Text, View, ScrollView, Alert, Linking } from "react-native";
 import { FormatCurrency } from "@/utils/functions/function-currency";
 
 import { ProductCartProps, useCartStore } from "@/stores/cart-store";
+import { useNavigation } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -10,12 +11,14 @@ import { Header } from "@/components/header";
 import { Product } from "@/components/product";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { LinkButton } from "@/components/linkButton";
 
 
-
+const NUMERO_D0_ESTABELECIMENTO = "558386377109"
 
 export default function Cart() {
     const [address, setAddress] = useState('')
+    const navigation = useNavigation()
 
     const cartStore = useCartStore()
     const total = FormatCurrency(cartStore.products.reduce((total, product) =>
@@ -49,8 +52,14 @@ export default function Cart() {
         \n 🛵 Entregar em: ${address}
         \n Itens : ${Products}
         \n 💰 Valor total: ${total}`
-        console.log(message)
+
+        Linking.openURL(`
+        http://api.whatsapp.com/send?phone=${NUMERO_D0_ESTABELECIMENTO}&text=${message}
+        `)
+
+        Alert.alert('Pedido enviado com sucesso ✅')
         cartStore.clear()
+        navigation.goBack()
     }
 
     return (
@@ -84,21 +93,27 @@ export default function Cart() {
                         <Input
                             className="mb-4"
                             placeholder="informações de entrega. Informe : bairro, rua e número   "
-                            onChangeText={setAddress} />
+                            onChangeText={setAddress}
+                            onSubmitEditing={Order}
+                            blurOnSubmit
+                            returnKeyType="next" />
+                            
                     </View>
-
-
-                    <Button
-                        className=""
-                        onPress={Order}>
-                        <Button.Text> Enviar Pedido </Button.Text>
-                        <Button.Icon>
-                            <Feather name="arrow-right-circle" size={25} />
-                        </Button.Icon>
-                    </Button>
-
                 </ScrollView>
             </KeyboardAwareScrollView>
+
+            <View className="p-4">
+                <Button
+                    className=""
+                    onPress={Order}>
+                    <Button.Text> Enviar Pedido </Button.Text>
+                    <Button.Icon>
+                        <Feather name="arrow-right-circle" size={25} />
+                    </Button.Icon>
+                </Button>
+                <LinkButton title="Voltar ao cardápio" href="/">  </LinkButton>
+            </View>
+
         </View>
     )
 }
