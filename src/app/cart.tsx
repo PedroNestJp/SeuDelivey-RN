@@ -50,6 +50,7 @@ export default function Cart() {
         \n Itens : ${Products}
         \n 💰 Valor total: ${total}`
         console.log(message)
+        cartStore.clear()
     }
 
     return (
