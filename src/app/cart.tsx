@@ -21,24 +21,35 @@ export default function Cart() {
     const total = FormatCurrency(cartStore.products.reduce((total, product) =>
         total + product.price * product.quantity, 0))
 
-    function handleDeletItem(product: ProductCartProps){
-        Alert.alert("Remover", `Deseja remover 1und do ${product.title} ?`,[
+    function handleDeletItem(product: ProductCartProps) {
+        Alert.alert("Remover", `Deseja remover 1und do ${product.title} ?`, [
             {
                 text: "Remover",
                 onPress: () => cartStore.remove(product.id),
             },
             {
-                text:"Cancelar"
+                text: "Cancelar"
             }
         ])
-        
+
     }
 
     function Order() {
-        console.log(Order, address)
-        if(address.trim().length === 0) {
-            Alert.alert('Pedido', 'informe o endereço de entrega')
+        if (address.trim().length === 0) {
+            return (
+                Alert.alert('Pedido', 'informe o endereço de entrega')
+            )
         }
+        const Products = cartStore.products.map((product) =>
+            `\n ${product.quantity} ${product.title}`).join('')
+        console.log(Products)
+
+        const message = `
+        🍔 NOVO PEDIDO 
+        \n 🛵 Entregar em: ${address}
+        \n Itens : ${Products}
+        \n 💰 Valor total: ${total}`
+        console.log(message)
     }
 
     return (
@@ -52,16 +63,16 @@ export default function Cart() {
                         <View className="flex-1 p-4 border-slate-400 border-b">
                             {cartStore.products.map((product) => (
                                 <Product
-                                data={product} 
-                                key={product.id}
-                                onPress={() => {handleDeletItem(product)}} />
+                                    data={product}
+                                    key={product.id}
+                                    onPress={() => { handleDeletItem(product) }} />
                             ))}
                         </View>
                         :
-                            <Text
-                                className="p-8 font-body text-slate-400 text-lg text-center">
-                                    Adicione itens ao seu pedido
-                            </Text>
+                        <Text
+                            className="p-8 font-body text-slate-400 text-lg text-center">
+                            Adicione itens ao seu pedido
+                        </Text>
                     }
 
                     <View className="p-4">
@@ -69,14 +80,14 @@ export default function Cart() {
                             <Text className="text-white text-xl font-subTitle "> Total:</Text>
                             <Text className=" text-2xl text-lime-400 font-heading">{total}</Text>
                         </View>
-                        <Input 
-                            className="mb-4" 
+                        <Input
+                            className="mb-4"
                             placeholder="informações de entrega. Informe : bairro, rua e número   "
                             onChangeText={setAddress} />
                     </View>
 
 
-                    <Button 
+                    <Button
                         className=""
                         onPress={Order}>
                         <Button.Text> Enviar Pedido </Button.Text>
