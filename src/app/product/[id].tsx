@@ -11,8 +11,6 @@ export default function Product() {
     const cartStore = useCartStore()
     const navigation = useNavigation()
     const { id } = useLocalSearchParams()
-    console.log(cartStore.products)
-
 
     function handleAddToCart() {
         if (product) {

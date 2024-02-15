@@ -17,7 +17,7 @@ type ButtonIconProps = TouchableOpacityProps & {
 function Button({ children, ...rest }: ButtonProps) {
     return (
         <TouchableOpacity
-            className="bg-lime-400 rounded-md items-center justify-center flex-row p-2 m-2"
+            className="bg-lime-400 rounded-md items-center justify-center flex-row p-4 m-4"
             activeOpacity={0.7}
             {...rest}>
                 {children}
@@ -29,7 +29,7 @@ function Button({ children, ...rest }: ButtonProps) {
 
 function ButtonText({ children, ...rest }: ButtonTextProps) {
     return (
-        <Text className="text-black text-base font-heading mx-2" {...rest}>
+        <Text className="text-black text-xl font-heading mx-2" {...rest}>
             {children}
         </Text>
         )
