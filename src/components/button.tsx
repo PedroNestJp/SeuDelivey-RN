@@ -29,7 +29,7 @@ function Button({ children, ...rest }: ButtonProps) {
 
 function ButtonText({ children, ...rest }: ButtonTextProps) {
     return (
-        <Text className="text-black text-xl font-heading mx-2" {...rest}>
+        <Text className="text-slate-800 text-xl font-heading mx-2" {...rest}>
             {children}
         </Text>
         )

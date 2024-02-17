@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "src/components/modalAlert.js", "src/app/context/AlertContext.js"  ]
 }

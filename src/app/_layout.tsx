@@ -9,6 +9,7 @@ import {
     Inter_700Bold,
 } from "@expo-google-fonts/inter"
 import { Loading } from "@/components/loading";
+import { AlertProvider } from "@/context/AlertContext";
 
 export default function Layout() {
     const [fontsLoaded] = useFonts({
@@ -26,7 +27,10 @@ export default function Layout() {
 
     return (
         <SafeAreaView className="bg-slate-900 flex-1 pt-12">
-            <Slot />
+            <AlertProvider>
+                <Slot />
+            </AlertProvider>
+
         </SafeAreaView>
     )
 }

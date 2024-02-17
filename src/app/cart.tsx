@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, ScrollView, Alert, Linking } from "react-native";
+import { Text, View, ScrollView, Linking } from "react-native";
 import { FormatCurrency } from "@/utils/functions/function-currency";
 
 import { ProductCartProps, useCartStore } from "@/stores/cart-store";
@@ -12,6 +12,10 @@ import { Product } from "@/components/product";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { LinkButton } from "@/components/linkButton";
+import ModalCustom from "@/components/modal";
+import ModalAlert from "@/components/modalAlert";
+import { useAlert } from '@/context/AlertContext'
+import { Alert } from '@/components/Alert'
 
 
 const NUMERO_D0_ESTABELECIMENTO = "558386377109"
@@ -19,30 +23,36 @@ const NUMERO_D0_ESTABELECIMENTO = "558386377109"
 export default function Cart() {
     const [address, setAddress] = useState('')
     const navigation = useNavigation()
+    const [modalVisible, setModalVisible] = useState(false)
+    const { showAlert } = useAlert()
 
     const cartStore = useCartStore()
     const total = FormatCurrency(cartStore.products.reduce((total, product) =>
         total + product.price * product.quantity, 0))
 
     function handleDeletItem(product: ProductCartProps) {
-        Alert.alert("Remover", `Deseja remover 1und do ${product.title} ?`, [
-            {
-                text: "Remover",
-                onPress: () => cartStore.remove(product.id),
-            },
-            {
-                text: "Cancelar"
-            }
-        ])
+        // Alert.alert("Remover", `Deseja remover 1und do ${product.title} ?`, [
+        //     {
+        //         text: "Remover",
+        //         onPress: () => cartStore.remove(product.id),
+        //     },
+        //     {
+        //         text: "Cancelar"
+        //     }
+        // ])
 
     }
 
     function Order() {
         if (address.trim().length === 0) {
-            return (
-                Alert.alert('Pedido', 'informe o endereço de entrega')
-            )
-        }
+            return(
+                showAlert('teste')
+                
+                )
+                
+                
+            }
+            console.log(Order)
         const Products = cartStore.products.map((product) =>
             `\n ${product.quantity} ${product.title}`).join('')
         // console.log(Products)
@@ -53,8 +63,8 @@ export default function Cart() {
         \n Itens : ${Products}
         \n 💰 Valor total: ${total}`
 
-        
-        Alert.alert('Pedido enviado com sucesso ✅')
+
+        // Alert.alert('Pedido enviado com sucesso ✅')
         Linking.openURL(
             `http://api.whatsapp.com/send?phone=${NUMERO_D0_ESTABELECIMENTO}&text=${message}`
         )
@@ -113,6 +123,11 @@ export default function Cart() {
                 </Button>
                 <LinkButton title="Voltar ao cardápio" href="/">  </LinkButton>
             </View>
+            {modalVisible && (
+                <ModalCustom
+                    modalMessage={('Pedido, informe o endereço de entrega')}
+                    onRequestClose={() => setModalVisible(false)} />
+            )}
 
         </View>
     )
