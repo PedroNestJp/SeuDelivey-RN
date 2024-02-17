@@ -45,7 +45,7 @@ export default function Cart() {
         }
         const Products = cartStore.products.map((product) =>
             `\n ${product.quantity} ${product.title}`).join('')
-        console.log(Products)
+        // console.log(Products)
 
         const message = `
         🍔 NOVO PEDIDO 
@@ -53,11 +53,11 @@ export default function Cart() {
         \n Itens : ${Products}
         \n 💰 Valor total: ${total}`
 
-        Linking.openURL(`
-        http://api.whatsapp.com/send?phone=${NUMERO_D0_ESTABELECIMENTO}&text=${message}
-        `)
-
+        
         Alert.alert('Pedido enviado com sucesso ✅')
+        Linking.openURL(
+            `http://api.whatsapp.com/send?phone=${NUMERO_D0_ESTABELECIMENTO}&text=${message}`
+        )
         cartStore.clear()
         navigation.goBack()
     }
@@ -97,7 +97,7 @@ export default function Cart() {
                             onSubmitEditing={Order}
                             blurOnSubmit
                             returnKeyType="next" />
-                            
+
                     </View>
                 </ScrollView>
             </KeyboardAwareScrollView>

@@ -1,13 +1,14 @@
 import { View, FlatList, SectionList, Text } from "react-native";
 import { useState, useRef } from "react";
+import { Link } from "expo-router";
 
 import { CATEGORIES, MENU, ProductProps } from "@/utils/data/products";
+import { useCartStore } from "@/stores/cart-store";
 
 import { Header } from "@/components/header";
 import { CategoryButton } from "@/components/category-button";
 import { Product } from "@/components/product";
-import { Link } from "expo-router";
-import { useCartStore } from "@/stores/cart-store";
+import ModalCustom from "@/components/modal";
 
 export default function Home() {
     const cartStore = useCartStore()
@@ -37,6 +38,7 @@ export default function Home() {
     return (
         <View className="flex-1 pt-8">
             <Header title={'Faça seu pedido'} cartQuantityItems={cartQuantityItems} />
+            <ModalCustom modalMessage="hi"/>
             <FlatList
                 data={CATEGORIES}
                 keyExtractor={(item) => item}

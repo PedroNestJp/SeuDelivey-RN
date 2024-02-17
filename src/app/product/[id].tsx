@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native";
+import { Alert, Image, Text, View } from "react-native";
 import { useLocalSearchParams, useNavigation, Redirect } from "expo-router";
 import { PRODUCTS } from "@/utils/data/products";
 import { FormatCurrency } from "@/utils/functions/function-currency";
@@ -15,6 +15,7 @@ export default function Product() {
     function handleAddToCart() {
         if (product) {
             cartStore.add(product)
+            Alert.alert(`1 ${product.title} adicionado ao pedido ✅`)
             navigation.goBack()
         }
     }
